@@ -1,0 +1,9 @@
+main: de.rexlnico.signsystem.main.Main
+author: rexlNico
+version: 1.0
+name: SignSystem
+website: http://rexlNico.de
+commands:
+    createSign:
+    addServer:
+    addSign:
