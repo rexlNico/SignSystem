@@ -21,6 +21,7 @@ public class MessageManager {
     private String serverNotExist = "%prefix% &cThe server %serverName% does not exist!";
     private String addServer = "%prefix% &aYou successfully added the server %serverName% with the ip: %ip%:%port% to the group %group%.";
     private String removeServer = "%prefix% &cThe server %serverName% with the ip: %ip%:%port% was successfully removed.";
+    private String reloadConfigs = "%prefix% &cReloaded all configs.";
 
     private boolean setBlock = true;
 
@@ -35,6 +36,8 @@ public class MessageManager {
     }
 
     public void update() throws IOException {
+        file = new File("plugins/SignSystem/config/Messages.yml");
+        cfg = YamlConfiguration.loadConfiguration(file);
         if (!file.exists()) {
             cfg.set("Prefix", prefix);
             cfg.set("ErrorMessage", errorMessage);
@@ -49,6 +52,7 @@ public class MessageManager {
             cfg.set("BlockOffline", blockOffline);
             cfg.set("BlockOnline", blockOnline);
             cfg.set("BlockFull", blockFull);
+            cfg.set("ReloadConfig", reloadConfigs);
             cfg.save(file);
         }
         prefix = cfg.getString("Prefix");
@@ -64,6 +68,7 @@ public class MessageManager {
         blockOffline = getMaterial(cfg.getString("BlockOffline"), blockOffline);
         blockOnline = getMaterial(cfg.getString("BlockOnline"), blockOnline);
         blockFull = getMaterial(cfg.getString("BlockFull"), blockFull);
+        reloadConfigs = cfg.getString("ReloadConfig");
     }
 
     private boolean isInteger(String subID) {
@@ -74,6 +79,10 @@ public class MessageManager {
 
         }
         return false;
+    }
+
+    public String ReloadConfigs() {
+        return ChatColor.translateAlternateColorCodes('&', reloadConfigs.replace("%prefix%", getPrefix()));
     }
 
     private String getMaterial(String cfgMaterial, String defaultS) {

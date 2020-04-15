@@ -2,11 +2,12 @@ package de.rexlnico.signsystem.main;
 
 import de.rexlnico.signsystem.command.AddServer;
 import de.rexlnico.signsystem.command.AddSign;
+import de.rexlnico.signsystem.command.Reload;
 import de.rexlnico.signsystem.command.StaticSign;
 import de.rexlnico.signsystem.configuration.MessageManager;
 import de.rexlnico.signsystem.configuration.PermissionManager;
 import de.rexlnico.signsystem.configuration.SignLayoutManager;
-import de.rexlnico.signsystem.listeners.BlockBreake;
+import de.rexlnico.signsystem.listeners.BlockBreak;
 import de.rexlnico.signsystem.server.ServerManager;
 import de.rexlnico.signsystem.sign.SignManager;
 import org.bukkit.Bukkit;
@@ -39,11 +40,12 @@ public class Main extends JavaPlugin {
         signManager = new SignManager();
         serverManager = new ServerManager();
 
-        pm.registerEvents(new BlockBreake(), this);
+        pm.registerEvents(new BlockBreak(), this);
 
         getCommand("createSign").setExecutor(new StaticSign());
         getCommand("addServer").setExecutor(new AddServer());
         getCommand("addSign").setExecutor(new AddSign());
+        getCommand("reloadcfg").setExecutor(new Reload());
 
         Bukkit.getConsoleSender().sendMessage("§aSignSystem loaded");
 

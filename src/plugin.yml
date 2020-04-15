@@ -7,3 +7,4 @@ commands:
     createSign:
     addServer:
     addSign:
+    reloadcfg:

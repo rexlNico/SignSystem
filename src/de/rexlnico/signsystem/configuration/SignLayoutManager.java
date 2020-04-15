@@ -47,6 +47,10 @@ public class SignLayoutManager {
     }
 
     public void update() throws IOException {
+        fileStatic = new File("plugins/SignSystem/config/SignLayoutStatic.yml");
+        cfgStatic = YamlConfiguration.loadConfiguration(fileStatic);
+        fileDynamic = new File("plugins/SignSystem/config/SignLayoutDynamic.yml");
+        cfgDynamic = YamlConfiguration.loadConfiguration(fileDynamic);
         if (!fileStatic.exists()) {
             ArrayList<String> layout1 = new ArrayList<>();
             ArrayList<String> layout2 = new ArrayList<>();

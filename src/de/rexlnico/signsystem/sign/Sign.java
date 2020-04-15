@@ -61,32 +61,34 @@ public class Sign {
             }
         }
         if (server != null) server.update();
-        if (server == null || !server.isOnline()) {
-            String material = Main.getMessageManager().BlockOffline();
-            if (material.contains(":")) {
-                String[] list = material.split(":");
-                back.getBlock().setType(Material.valueOf(list[0]));
-                back.getBlock().setData((byte) Integer.parseInt(list[1]));
+        if (Main.getMessageManager().isSetBlock()) {
+            if (server == null || !server.isOnline()) {
+                String material = Main.getMessageManager().BlockOffline();
+                if (material.contains(":")) {
+                    String[] list = material.split(":");
+                    back.getBlock().setType(Material.valueOf(list[0]));
+                    back.getBlock().setData((byte) Integer.parseInt(list[1]));
+                } else {
+                    back.getBlock().setType(Material.valueOf(material));
+                }
+            } else if (server.isFull()) {
+                String material = Main.getMessageManager().BlockFull();
+                if (material.contains(":")) {
+                    String[] list = material.split(":");
+                    back.getBlock().setType(Material.valueOf(list[0]));
+                    back.getBlock().setData((byte) Integer.parseInt(list[1]));
+                } else {
+                    back.getBlock().setType(Material.valueOf(material));
+                }
             } else {
-                back.getBlock().setType(Material.valueOf(material));
-            }
-        } else if (server.isFull()) {
-            String material = Main.getMessageManager().BlockFull();
-            if (material.contains(":")) {
-                String[] list = material.split(":");
-                back.getBlock().setType(Material.valueOf(list[0]));
-                back.getBlock().setData((byte) Integer.parseInt(list[1]));
-            } else {
-                back.getBlock().setType(Material.valueOf(material));
-            }
-        } else {
-            String material = Main.getMessageManager().BlockOnline();
-            if (material.contains(":")) {
-                String[] list = material.split(":");
-                back.getBlock().setType(Material.valueOf(list[0]));
-                back.getBlock().setData((byte) Integer.parseInt(list[1]));
-            } else {
-                back.getBlock().setType(Material.valueOf(material));
+                String material = Main.getMessageManager().BlockOnline();
+                if (material.contains(":")) {
+                    String[] list = material.split(":");
+                    back.getBlock().setType(Material.valueOf(list[0]));
+                    back.getBlock().setData((byte) Integer.parseInt(list[1]));
+                } else {
+                    back.getBlock().setType(Material.valueOf(material));
+                }
             }
         }
     }

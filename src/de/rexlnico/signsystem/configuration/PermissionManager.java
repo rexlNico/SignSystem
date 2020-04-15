@@ -16,6 +16,7 @@ public class PermissionManager {
     private String removeDynamicSign = "signsystem.remove.sign";
     private String addDynamicServer = "signsystem.add.server";
     private String removeDynamicServer = "signsystem.remove.server";
+    private String reloadConfigs = "signsystem.reload";
 
     public PermissionManager() throws IOException {
         file = new File("plugins/SignSystem/config/Permissions.yml");
@@ -24,6 +25,8 @@ public class PermissionManager {
     }
 
     public void update() throws IOException {
+        file = new File("plugins/SignSystem/config/Permissions.yml");
+        cfg = YamlConfiguration.loadConfiguration(file);
         if (!file.exists()) {
             cfg.set("CreateStaticSign", createStaticSign);
             cfg.set("RemoveStaticSign", removeStaticSign);
@@ -31,6 +34,7 @@ public class PermissionManager {
             cfg.set("RemoveDynamicSign", removeDynamicSign);
             cfg.set("AddDynamicServer", addDynamicServer);
             cfg.set("RemoveDynamicServer", removeDynamicServer);
+            cfg.set("ReloadConfigs", reloadConfigs);
             cfg.save(file);
         }
         createStaticSign = cfg.getString("CreateStaticSign");
@@ -39,6 +43,11 @@ public class PermissionManager {
         removeDynamicSign = cfg.getString("RemoveDynamicSign");
         addDynamicServer = cfg.getString("AddDynamicServer");
         removeDynamicServer = cfg.getString("RemoveDynamicServer");
+        reloadConfigs = cfg.getString("ReloadConfigs");
+    }
+
+    public String getReloadConfigs() {
+        return reloadConfigs;
     }
 
     public String getRemoveStaticSign() {
